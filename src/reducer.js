@@ -10,6 +10,9 @@ const reducer = (state, action) => {
   if (action.type === "ADD_CATEGORIES") {
     return { ...state, categories: action.payload.categories };
   }
+  if (action.type === "SET_LOADING") {
+    return { ...state, isLoading: action.payload.value };
+  }
 
   return state;
 };

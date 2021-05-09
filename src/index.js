@@ -13,6 +13,7 @@ const initialState = {
     difficulty: "medium",
     type: "multiple",
   },
+  isLoading: false,
   categories: [],
   nbCorrect: 0,
 };
