@@ -17,6 +17,8 @@ const initialState = {
   categories: [],
   nbCorrect: 0,
   questions: [],
+  index: 0,
+  showModal: false,
 };
 
 const store = createStore(reducer, initialState);

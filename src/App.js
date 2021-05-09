@@ -3,8 +3,9 @@ import QuizForm from "./QuizForm";
 import axios from "axios";
 import { connect } from "react-redux";
 import Loading from "./Loading";
+import QuizQuestion from "./QuizQuestion";
 
-function App({ isLoading, isWaiting, getCategory, questions }) {
+function App({ isLoading, isWaiting, getCategory }) {
   useEffect(() => {
     getCategory();
   }, [getCategory]);
@@ -17,7 +18,9 @@ function App({ isLoading, isWaiting, getCategory, questions }) {
   }
   return (
     <main>
-      <section className="section-center"></section>
+      <section className="section-center">
+        <QuizQuestion />
+      </section>
     </main>
   );
 }

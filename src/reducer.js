@@ -19,7 +19,24 @@ const reducer = (state, action) => {
   if (action.type === "SET_QUESTIONS") {
     return { ...state, questions: action.payload.questions };
   }
-
+  if (action.type === "NEXT_QUESTION") {
+    return { ...state, index: state.index + 1 };
+  }
+  if (action.type === "CHECK_ANSWER") {
+    const correct = action.payload.correct ? 1 : 0;
+    if (state.index === state.questions.length - 1) {
+      return {
+        ...state,
+        nbCorrect: state.nbCorrect + correct,
+        showModal: true,
+      };
+    }
+    return {
+      ...state,
+      nbCorrect: state.nbCorrect + correct,
+      index: state.index + 1,
+    };
+  }
   return state;
 };
 
