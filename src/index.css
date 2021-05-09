@@ -11,9 +11,64 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgba(175, 114, 64, 0.295);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.section-center {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn {
+  padding: 0.25rem;
+  background-color: rgba(230, 112, 16, 0.993);
+  border-radius: 0.25rem;
+  border: none;
+  font-size: 1.1rem;
+}
+
+.btn:hover {
+  background-color: rgb(8, 8, 8);
+  color: rgba(243, 240, 240, 0.993);
+}
+
+/*
+===========
+Quiz Form
+===========
+*/
+.quiz-form-div {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  width: 70vw;
+  max-width: 500px;
+  padding: 2rem;
+  border-radius: 0.25rem;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.74);
+  text-transform: capitalize;
+}
+
+.quiz-form-div h2 {
+  margin-bottom: 2rem;
+}
+
+.quiz-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.quiz-form input,
+select {
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  padding: 0.25rem;
+  text-transform: capitalize;
 }

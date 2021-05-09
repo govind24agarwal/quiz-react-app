@@ -1,7 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import QuizForm from "./QuizForm";
-function App() {
-  return <QuizForm/>;
+import axios from "axios";
+import { connect } from "react-redux";
+
+function App({ getCategory }) {
+  useEffect(() => {
+    getCategory();
+  }, [getCategory]);
+
+  return <QuizForm />;
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getCategory: () => {
+      axios.get("https://opentdb.com/api_category.php").then((response) => {
+        dispatch({
+          type: "ADD_CATEGORIES",
+          payload: { categories: response.data.trivia_categories },
+        }).catch((error) => {
+          console.log(error);
+        });
+      });
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(App);
