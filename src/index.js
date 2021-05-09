@@ -11,11 +11,12 @@ const initialState = {
     number: 10,
     category: 17,
     difficulty: "medium",
-    type: "multiple",
   },
   isLoading: false,
+  isWaiting: true,
   categories: [],
   nbCorrect: 0,
+  questions: [],
 };
 
 const store = createStore(reducer, initialState);

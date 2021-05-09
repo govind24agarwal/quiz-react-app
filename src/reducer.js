@@ -13,6 +13,12 @@ const reducer = (state, action) => {
   if (action.type === "SET_LOADING") {
     return { ...state, isLoading: action.payload.value };
   }
+  if (action.type === "SET_WAITING") {
+    return { ...state, isWaiting: action.payload.value };
+  }
+  if (action.type === "SET_QUESTIONS") {
+    return { ...state, questions: action.payload.questions };
+  }
 
   return state;
 };

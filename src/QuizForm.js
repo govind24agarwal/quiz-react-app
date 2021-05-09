@@ -1,12 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
+import axios from "axios";
 
-function QuizForm({ number, category, difficulty, categories, handleChange }) {
+function QuizForm({ quizForm, categories, handleChange, startQuiz }) {
+  const { number, category, difficulty } = quizForm;
   return (
     <div className="section-center">
       <div className="quiz-form-div">
         <h2>Setup Quiz</h2>
-        <form className="quiz-form">
+        <form
+          className="quiz-form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            startQuiz(quizForm);
+          }}
+        >
           <label name="number">Number Of Questions</label>
           <input
             name="number"
@@ -52,7 +60,7 @@ function QuizForm({ number, category, difficulty, categories, handleChange }) {
 
 const mapStateToProps = (store) => {
   const { quizForm, categories } = store;
-  return { ...quizForm, categories };
+  return { quizForm, categories };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -60,6 +68,27 @@ const mapDispatchToProps = (dispatch) => {
     handleChange(target) {
       const { name, value } = target;
       dispatch({ type: "QUIZ-FORM-CHANGE", payload: { name, value } });
+    },
+    startQuiz: (quizForm) => {
+      const { number, category, difficulty } = quizForm;
+      dispatch({ type: "SET_WAITING", payload: { value: false } });
+      dispatch({ type: "SET_LOADING", payload: { value: true } });
+      axios
+        .get(
+          `https://opentdb.com/api.php?amount=${number}&category=${category}&difficulty=${difficulty}&type=multiple`
+        )
+        .then((response) => {
+          dispatch({
+            type: "SET_QUESTIONS",
+            payload: { questions: response.data.results },
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .then(() => {
+          dispatch({ type: "SET_LOADING", payload: { value: false } });
+        });
     },
   };
 };
