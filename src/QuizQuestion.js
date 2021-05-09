@@ -20,8 +20,6 @@ function QuizQuestion({
       ...incorrect_answers.slice(ansIndex, 4),
     ];
   })();
-
-  console.log(question);
   return (
     <div className="question">
       <div className="correct">

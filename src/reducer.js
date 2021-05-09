@@ -8,7 +8,14 @@ const reducer = (state, action) => {
     };
   }
   if (action.type === "ADD_CATEGORIES") {
-    return { ...state, categories: action.payload.categories };
+    return {
+      ...state,
+      nbCorrect: 0,
+      index: 0,
+      showModal: false,
+      isWaiting: true,
+      categories: action.payload.categories,
+    };
   }
   if (action.type === "SET_LOADING") {
     return { ...state, isLoading: action.payload.value };
@@ -17,7 +24,10 @@ const reducer = (state, action) => {
     return { ...state, isWaiting: action.payload.value };
   }
   if (action.type === "SET_QUESTIONS") {
-    return { ...state, questions: action.payload.questions };
+    return {
+      ...state,
+      questions: action.payload.questions,
+    };
   }
   if (action.type === "NEXT_QUESTION") {
     return { ...state, index: state.index + 1 };

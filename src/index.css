@@ -32,6 +32,8 @@ code {
   border-radius: 0.25rem;
   border: none;
   font-size: 1.1rem;
+  text-transform: capitalize;
+  cursor: pointer;
 }
 
 .btn:hover {
@@ -191,4 +193,43 @@ Question
   margin-top: 1rem;
   margin-left: 8rem;
   width: 100%;
+}
+
+/*
+===========
+Modal
+===========
+*/
+
+.modal-overlay {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.459);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+}
+
+.modal {
+  background-color: white;
+  border-radius: 0.25rem;
+  box-shadow: 3px 3px 5px rgb(0, 0, 0);
+  min-height: 70vh;
+  min-width: 70vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 2rem;
+}
+
+.modal h2 {
+  font-weight: 400;
+  font-size: 1.3rem;
+}
+
+.modal button {
+  width: 50%;
+  font-size: 3rem;
 }
