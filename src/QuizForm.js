@@ -16,7 +16,7 @@ function QuizForm({
     if (error.show) {
       setTimeout(() => {
         hideError();
-      }, 1500);
+      }, 2000);
     }
   }, []);
 
@@ -95,7 +95,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: "SET_LOADING", payload: { value: true } });
       axios
         .get(
-          `https://opentdb.com/api.php?amount=${number}&category=${category}&difficulty=${difficulty}&type=multiple`
+          `https://opentdb.com/api.php?amount=${number}&category=${category}&difficulty=${difficulty}&type=multiple&encode=url3986`
         )
         .then((response) => {
           if (response.data.response_code === 1) {

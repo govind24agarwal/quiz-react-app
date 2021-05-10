@@ -27,9 +27,10 @@ function QuizQuestion({
           Correct Answers: {nbCorrect}/{index}
         </p>
       </div>
-      <h3>{question.question}</h3>
+      <h3>{decodeURI(question.question)}</h3>
       <div className="answers">
         {answers.map((answer, itemIndex) => {
+          console.log(answer);
           return (
             <button
               key={itemIndex}
@@ -38,7 +39,7 @@ function QuizQuestion({
                 checkAnswer(ansIndex === itemIndex);
               }}
             >
-              {answer}
+              {decodeURI(answer)}
             </button>
           );
         })}
