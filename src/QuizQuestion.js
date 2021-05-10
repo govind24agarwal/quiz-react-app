@@ -20,6 +20,7 @@ function QuizQuestion({
       ...incorrect_answers.slice(ansIndex, 4),
     ];
   })();
+  console.log(question.question);
   return (
     <div className="question">
       <div className="correct">
@@ -27,7 +28,7 @@ function QuizQuestion({
           Correct Answers: {nbCorrect}/{index}
         </p>
       </div>
-      <h3>{decodeURI(question.question)}</h3>
+      <h3>{decodeURIComponent(question.question)}</h3>
       <div className="answers">
         {answers.map((answer, itemIndex) => {
           console.log(answer);
@@ -39,7 +40,7 @@ function QuizQuestion({
                 checkAnswer(ansIndex === itemIndex);
               }}
             >
-              {decodeURI(answer)}
+              {decodeURIComponent(answer)}
             </button>
           );
         })}
