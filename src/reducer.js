@@ -47,6 +47,9 @@ const reducer = (state, action) => {
       index: state.index + 1,
     };
   }
+  if (action.type === "SET_ERROR") {
+    return { ...state, error: action.payload };
+  }
   return state;
 };
 

@@ -1,13 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 
-function QuizForm({ quizForm, categories, handleChange, startQuiz }) {
+function QuizForm({
+  quizForm,
+  categories,
+  error,
+  handleChange,
+  startQuiz,
+  hideError,
+}) {
   const { number, category, difficulty } = quizForm;
+
+  useEffect(() => {
+    if (error.show) {
+      setTimeout(() => {
+        hideError();
+      }, 1500);
+    }
+  }, []);
+
   return (
     <div className="section-center">
       <div className="quiz-form-div">
         <h2>Setup Quiz</h2>
+        {error && error.show && <p className="error">{error.msg}</p>}
         <form
           className="quiz-form"
           onSubmit={(e) => {
@@ -59,8 +76,8 @@ function QuizForm({ quizForm, categories, handleChange, startQuiz }) {
 }
 
 const mapStateToProps = (store) => {
-  const { quizForm, categories } = store;
-  return { quizForm, categories };
+  const { quizForm, categories, error } = store;
+  return { quizForm, categories, error };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -68,6 +85,9 @@ const mapDispatchToProps = (dispatch) => {
     handleChange(target) {
       const { name, value } = target;
       dispatch({ type: "QUIZ-FORM-CHANGE", payload: { name, value } });
+    },
+    hideError: () => {
+      dispatch({ type: "SET_ERROR", payload: { show: false, msg: "" } });
     },
     startQuiz: (quizForm) => {
       const { number, category, difficulty } = quizForm;
@@ -78,10 +98,21 @@ const mapDispatchToProps = (dispatch) => {
           `https://opentdb.com/api.php?amount=${number}&category=${category}&difficulty=${difficulty}&type=multiple`
         )
         .then((response) => {
-          dispatch({
-            type: "SET_QUESTIONS",
-            payload: { questions: response.data.results },
-          });
+          if (response.data.response_code === 1) {
+            dispatch({ type: "SET_WAITING", payload: { value: true } });
+            dispatch({
+              type: "SET_ERROR",
+              payload: {
+                show: true,
+                msg: "No mathing questions for your query.",
+              },
+            });
+          } else {
+            dispatch({
+              type: "SET_QUESTIONS",
+              payload: { questions: response.data.results },
+            });
+          }
         })
         .catch((error) => {
           console.log(error);

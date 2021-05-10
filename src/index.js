@@ -19,6 +19,7 @@ const initialState = {
   questions: [],
   index: 0,
   showModal: false,
+  error: { show: false, msg: "" },
 };
 
 const store = createStore(reducer, initialState);

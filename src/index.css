@@ -75,6 +75,16 @@ select {
   text-transform: capitalize;
 }
 
+.error {
+  margin-bottom: 0.75rem;
+  text-transform: capitalize;
+  background-color: rgb(165, 42, 42);
+  color: white;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  padding: 0.25rem;
+}
+
 /*
 ============
 Loading
@@ -215,8 +225,10 @@ Modal
   background-color: white;
   border-radius: 0.25rem;
   box-shadow: 3px 3px 5px rgb(0, 0, 0);
-  min-height: 70vh;
+  max-width: 90vw;
+  max-height: 70vh;
   min-width: 70vw;
+  min-height: 50vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -227,6 +239,7 @@ Modal
 .modal h2 {
   font-weight: 400;
   font-size: 1.3rem;
+  text-align: center;
 }
 
 .modal button {
